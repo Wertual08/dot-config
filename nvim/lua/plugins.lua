@@ -67,14 +67,15 @@ function Module.setup(use)
             "cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-calc",
             "hrsh7th/cmp-emoji",
             "hrsh7th/cmp-vsnip",
             "hrsh7th/vim-vsnip",
         },
-        event = "InsertEnter",
-        opt = true,
+        -- event = "InsertEnter",
+        -- opt = true,
         config = require("config.cmp").setup,
     }
 
@@ -117,6 +118,13 @@ function Module.setup(use)
     use {
         "nvim-tree/nvim-tree.lua",
         requires = "nvim-web-devicons",
+    }
+
+    -- Terminal
+    use {
+        "akinsho/toggleterm.nvim",
+        tag = '*',
+        config = require("config.toggleterm").setup,
     }
 end
 

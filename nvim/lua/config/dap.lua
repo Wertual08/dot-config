@@ -18,12 +18,27 @@ function Module.setup()
 		numhl = "",
 	})
 
+
 	vim.keymap.set('n', '<F5>', dap.continue)
+	vim.keymap.set('n', '<Shift-F5>', dap.terminate)
 	vim.keymap.set('n', '<F10>', dap.step_over)
 	vim.keymap.set('n', '<F11>', dap.step_into)
 	vim.keymap.set('n', '<F12>', dap.step_out)
 	vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
-
+    vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+      require('dap.ui.widgets').hover()
+    end)
+    vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+      require('dap.ui.widgets').preview()
+    end)
+    vim.keymap.set('n', '<Leader>df', function()
+      local widgets = require('dap.ui.widgets')
+      widgets.centered_float(widgets.frames)
+    end)
+    vim.keymap.set('n', '<Leader>ds', function()
+      local widgets = require('dap.ui.widgets')
+      widgets.centered_float(widgets.scopes)
+    end)
 
 	-- CSharp
 	dap.adapters.coreclr = {
@@ -37,8 +52,8 @@ function Module.setup()
 
 	dapui.setup({
 		icons = {
-			expanded = "", 
-			collapsed = "", 
+			expanded = "",
+			collapsed = "",
 			current_frame = "▸",
  		},
 		mappings = {

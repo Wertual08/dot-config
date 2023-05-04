@@ -27,7 +27,7 @@ function Module.setup()
 		vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 		vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-		vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+		vim.keymap.set('n', '<space><C-f>', function() vim.lsp.buf.format { async = true } end, bufopts)
 
 		if client.server_capabilities.documentSymbolProvider then
 			require("nvim-navic").attach(client, bufnr)
@@ -103,25 +103,30 @@ function Module.setup()
 		flags = lsp_flags,
 		capabilities = capabilities,
 	}
-	lspconfig['omnisharp'].setup {
+	-- lspconfig['omnisharp'].setup {
+	-- 	on_attach = on_attach,
+	-- 	flags = lsp_flags,
+	-- 	capabilities = capabilities,
+
+	-- 	enable_editorconfig_support = true,
+
+	-- 	enable_ms_build_load_projects_on_demand = false,
+
+	-- 	enable_roslyn_analyzers = false,
+
+	-- 	organize_imports_on_format = true,
+
+	-- 	enable_import_completion = true,
+
+	-- 	sdk_include_prereleases = true,
+
+	-- 	analyze_open_documents_only = false,
+	-- }
+    lspconfig['csharp_ls'].setup {
 		on_attach = on_attach,
 		flags = lsp_flags,
 		capabilities = capabilities,
-
-		enable_editorconfig_support = true,
-
-		enable_ms_build_load_projects_on_demand = false,
-
-		enable_roslyn_analyzers = false,
-
-		organize_imports_on_format = true,
-
-		enable_import_completion = true,
-
-		sdk_include_prereleases = true,
-
-		analyze_open_documents_only = false,
-	}
+    }
 	lspconfig['rust_analyzer'].setup {
 		on_attach = on_attach,
 		flags = lsp_flags,

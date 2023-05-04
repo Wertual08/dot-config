@@ -1,5 +1,20 @@
 #! /bin/sh
 
+internal_monitor="DP-4"
+external_monitor="HDMI-0"
+external_monitor_connected=$(xrandr --query | grep $external_monitor)
+
+if [[ $external_monitor_connected = *" connected"* ]]; then
+    xrandr --output $internal_monitor --primary --output $external_monitor --right-of $internal_monitor
+    bspc monitor $internal_monitor -d 1 2 3 4 5
+    bspc monitor $external_monitor -d 6 7 8 9 10
+    bspc wm -O $internal_monitor $external_monitor
+else
+    bspc monitor $external_monitor --remove
+    bspc monitor $internal_monitor -d 1 2 3 4 5 6 7 8 9 10
+fi
+
+
 #Start polybar first
 bash ~/.config/polybar/launch.sh &
 
@@ -28,7 +43,6 @@ xset s 120 120
 #localectl set-keymap us ru
 
 #Monitor Config
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 #BSPWM Config
 bspc config border_width        1
@@ -72,5 +86,6 @@ bspc rule -a synergy desktop='^9'
 
 #Auto-Start
 picom --config "$HOME/.config/bspwm/picom.conf" &
-nitrogen --set-auto "$HOME/.config/bg.jpg" &
+nitrogen --set-auto --head=0 "$HOME/.config/bg0.jpg" &
+nitrogen --set-auto --head=0 "$HOME/.config/bg1.jpg" &
 

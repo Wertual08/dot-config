@@ -11,7 +11,7 @@ vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 vim.cmd([[aunmenu PopUp.How-to\ disable\ mouse]])
 vim.cmd([[aunmenu PopUp.-1-]])
 
-vim.keymap.set('n', 'tt', '<Cmd>vsplit|:term<CR>', {silent = true })
+vim.keymap.set('n', '<space>t', '<Cmd>ToggleTerm<CR>', {silent = true })
 
 require("setup").setup()
 

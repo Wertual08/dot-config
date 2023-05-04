@@ -6,7 +6,7 @@ function Module.setup()
     vim.opt.termguicolors = true
 
     local api = require("nvim-tree.api")
-    vim.keymap.set('n', 'tv', api.tree.toggle, {})
+    vim.keymap.set('n', '<space>v', api.tree.toggle, {})
 
     local nvimtree = require("nvim-tree")
     nvimtree.setup {
@@ -25,6 +25,9 @@ function Module.setup()
             open_file = {
                 resize_window = true,
             },
+        },
+        git = {
+            ignore = false,
         },
     }
 end
