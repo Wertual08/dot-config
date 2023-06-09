@@ -9,7 +9,7 @@ function Module.setup()
     vim.keymap.set('n', '<Space>b', builtin.buffers, {})
     vim.keymap.set('n', '<Space>h', builtin.help_tags, {})
 
-    require("telescope").setup{
+    require("telescope").setup {
         defaults = {
             file_ignore_patterns = { "bin", "obj" }
         }

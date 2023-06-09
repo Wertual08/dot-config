@@ -20,6 +20,7 @@ function Module.setup()
         },
         filters = {
             custom = { ".git" },
+            dotfiles = false,
         },
         actions = {
             open_file = {
