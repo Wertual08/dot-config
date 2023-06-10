@@ -1,11 +1,12 @@
-#! /bin/sh
+#! /bin/bash
+
+xrdb ~/.Xresources
 
 # Monitor Config
-internal_monitor="DP-4"
-external_monitor="HDMI-0"
-external_monitor_connected=$(xrandr --query | grep $external_monitor)
+internal_monitor=$(xrandr --listactivemonitors | grep -Po "(?<= \+\*)[-\w]+")
+external_monitor=$(xrandr --listactivemonitors | grep -Po "(?<= \+)[-\w]+")
 
-if [[ $external_monitor_connected = *" connected"* ]]; then
+if [[ $external_monitor ]]; then
     xrandr --output $internal_monitor --primary --output $external_monitor --right-of $internal_monitor
     bspc monitor $internal_monitor -d 1 2 3 4 5
     bspc monitor $external_monitor -d 6 7 8 9 10
@@ -63,10 +64,10 @@ bspc rule -a firefox            desktop='^3'
 bspc rule -a TelegramDesktop    desktop='^4'
 bspc rule -a synergy            desktop='^9'
 
-nitrogen --restore
+nitrogen --restore || true
 
 # Auto-Start
-bash ~/.config/polybar/launch.sh &
+bash ~/.config/polybar/launch.sh $internal_monitor $external_monitor &
 
 while :; do
     if pgrep -x sxhkd > /dev/null; then
@@ -77,5 +78,5 @@ while :; do
     sleep 5
 done &
 
-picom --config "$HOME/.config/bspwm/picom.conf" 
+picom --config "$HOME/.config/bspwm/picom.conf"
 

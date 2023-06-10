@@ -8,7 +8,7 @@ super + t
 
 # program launcher
 super + x
-	rofi -show drun
+	rofi -modi drun -show drun
 
 # clipboard history
 super + v
