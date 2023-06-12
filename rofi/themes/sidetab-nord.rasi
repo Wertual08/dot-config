@@ -14,7 +14,7 @@
     background-color: @background;
     location: northwest;
     x-offset: 4;
-    y-offset: 46;
+    y-offset: 34;
     height: 64%;
 }
 
