@@ -103,25 +103,25 @@ function Module.setup()
 		flags = lsp_flags,
 		capabilities = capabilities,
 	}
-	-- lspconfig['omnisharp'].setup {
-	-- 	on_attach = on_attach,
-	-- 	flags = lsp_flags,
-	-- 	capabilities = capabilities,
+    --lspconfig['omnisharp'].setup {
+	--	on_attach = on_attach,
+	--	flags = lsp_flags,
+	--	capabilities = capabilities,
 
-	-- 	enable_editorconfig_support = true,
+	--	enable_editorconfig_support = true,
 
-	-- 	enable_ms_build_load_projects_on_demand = false,
+	--	enable_ms_build_load_projects_on_demand = false,
 
-	-- 	enable_roslyn_analyzers = false,
+	--	enable_roslyn_analyzers = false,
 
-	-- 	organize_imports_on_format = true,
+	--	organize_imports_on_format = true,
 
-	-- 	enable_import_completion = true,
+	--	enable_import_completion = true,
 
-	-- 	sdk_include_prereleases = true,
+	--	sdk_include_prereleases = true,
 
-	-- 	analyze_open_documents_only = false,
-	-- }
+	--	analyze_open_documents_only = false,
+	--}
     lspconfig['csharp_ls'].setup {
 		on_attach = on_attach,
 		flags = lsp_flags,
