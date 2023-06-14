@@ -16,15 +16,49 @@ PATH_FG="\[\e[30m\]"
 FILES_SBG="\e[36m"
 FILES_BG="\e[46m"
 FILES_FG="\e[30m"
-GIT_SBG="\e[33m"
-GIT_BG="\e[43m"
+GIT_DIRTY_SBG="\e[31m"
+GIT_DIRTY_BG="\e[41m"
+GIT_CLEAN_SBG="\e[32m"
+GIT_CLEAN_BG="\e[42m"
 GIT_FG="\e[30m"
 
 parse_git() {
-    BRANCH=$(git branch --show-current 2> /dev/null)
+    STATUS="$(git status -s -b --ahead-behind --porcelain 2> /dev/null)"
+    BRANCH=$(grep -m1 -Po "(?<=## ).+?(?=\\.\\.\\.)" <<< "$STATUS")
+    REMOTE=$(grep -m1 -Po "(?<=\\.\\.\\.).+?(?= \\[)" <<< "$STATUS")
+    AHEAD=$(grep -m1 -Po "(?<= \\[ahead )\\d+?(?=\\])" <<< "$STATUS")
+    BEHIND=$(grep -m1 -Po "(?<= \\[behind )\\d+?(?=\\])" <<< "$STATUS")
+    DIRTY=$(grep -m1 -Po "^ \\w .*" <<< "$STATUS")
 
     if [[ $BRANCH ]]; then
-        echo -e "${FILES_SBG}${GIT_BG} ${GIT_FG} $BRANCH ${FMT_RESET}${GIT_SBG}"
+        if [[ $DIRTY ]]; then
+            GIT="${FILES_SBG}${GIT_DIRTY_BG}"
+        else
+            GIT="${FILES_SBG}${GIT_CLEAN_BG}"
+        fi
+
+        GIT+=" ${GIT_FG} $BRANCH "
+
+        if [[ $REMOTE ]]; then
+            if [[ $AHEAD ]]; then
+                GIT+="+${AHEAD}"
+            fi
+            if [[ $BEHIND ]]; then
+                GIT+="-${BEHIND}"
+            fi
+
+            GIT+="> ${REMOTE} "
+        fi
+
+        if [[ $DIRTY ]]; then
+            GIT_SBG="${GIT_DIRTY_SBG}"
+        else
+            GIT_SBG="${GIT_CLEAN_SBG}"
+        fi
+        
+        GIT+="${FMT_RESET}${GIT_SBG}"
+
+        echo -e "${GIT}"
     else
         echo -e "${FMT_RESET}${FILES_SBG}"
     fi
