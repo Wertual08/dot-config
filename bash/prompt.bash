@@ -1,3 +1,5 @@
+#! /bin/bash
+
 FMT_RESET="\e[0m"
 FMT_BOLD="\e[1m"
 FMT_DIM="\e[2m"
@@ -21,7 +23,7 @@ GIT_FG="\e[30m"
 parse_git() {
     BRANCH=$(git branch 2> /dev/null | grep -Po '(?<=\* ).+')
 
-    if [[ $BRANCH ]] then
+    if [[ $BRANCH ]]; then
         echo -e "${FILES_SBG}${GIT_BG} ${GIT_FG} $BRANCH ${FMT_RESET}${GIT_SBG}"
     else
         echo -e "${FMT_RESET}${FILES_SBG}"
