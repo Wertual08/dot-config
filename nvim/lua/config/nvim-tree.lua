@@ -19,11 +19,12 @@ function Module.setup()
             relativenumber = true,
         },
         filters = {
-            custom = { ".git" },
+            custom = { "^\\.git$" },
             dotfiles = false,
         },
         actions = {
             open_file = {
+                quit_on_open = true,
                 resize_window = true,
             },
         },

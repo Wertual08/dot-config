@@ -21,7 +21,7 @@ GIT_BG="\e[43m"
 GIT_FG="\e[30m"
 
 parse_git() {
-    BRANCH=$(git branch 2> /dev/null | grep -Po '(?<=\* ).+')
+    BRANCH=$(git branch --show-current 2> /dev/null)
 
     if [[ $BRANCH ]]; then
         echo -e "${FILES_SBG}${GIT_BG} ${GIT_FG} $BRANCH ${FMT_RESET}${GIT_SBG}"
