@@ -24,7 +24,7 @@ GIT_FG="\e[30m"
 
 parse_git() {
     STATUS="$(git status -s -b --ahead-behind --porcelain 2> /dev/null)"
-    BRANCH=$(grep -m1 -Po "(?<=## )[-\w]+" <<< "$STATUS")
+    BRANCH=$(grep -m1 -Po "(?<=## )[\-\w\/]+" <<< "$STATUS")
     REMOTE=$(grep -m1 -Po "(?<=\\.\\.\\.).+?(?= \\[)" <<< "$STATUS")
     AHEAD=$(grep -m1 -Po "(?<= \\[ahead )\\d+?(?=\\])" <<< "$STATUS")
     BEHIND=$(grep -m1 -Po "(?<= \\[behind )\\d+?(?=\\])" <<< "$STATUS")
