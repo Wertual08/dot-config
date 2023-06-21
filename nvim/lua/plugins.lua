@@ -3,10 +3,17 @@ local Module = {}
 function Module.setup(use)
     -- Colorscheme
     use {
-        "marko-cerovac/material.nvim",
+        "Mofiqul/vscode.nvim",
         config = function()
-            vim.g.material_style = "deep ocean"
-            vim.cmd("colorscheme material")
+            local vscode = require('vscode')
+
+            vscode.setup {
+                disable_nvimtree_bg = true,
+            }
+
+            vscode.load()
+
+            vim.cmd("colorscheme vscode")
         end,
     }
 
