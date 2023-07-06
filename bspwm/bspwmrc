@@ -3,17 +3,17 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 if [[ -f ~/.ssetup ]]; then
-    source ~/.ssetup
+    . ~/.ssetup
 fi
 
 (cd $SCRIPT_DIR; xrdb Xresources)
 
-source $SCRIPT_DIR/configure_x.sh
-source $SCRIPT_DIR/configure_monitors.sh
-source $SCRIPT_DIR/configure_bspwm.sh
-source $SCRIPT_DIR/configure_wallpapers.sh
-source $SCRIPT_DIR/configure_applications.sh
+. $SCRIPT_DIR/configure_x.sh
+. $SCRIPT_DIR/configure_monitors.sh
+. $SCRIPT_DIR/configure_bspwm.sh
+. $SCRIPT_DIR/configure_wallpapers.sh
+. $SCRIPT_DIR/configure_applications.sh
 
-source $SCRIPT_DIR/launch_sxhkd.sh
-source $SCRIPT_DIR/launch_polybar.sh $internal_monitor $external_monitor 
-source $SCRIPT_DIR/launch_picom.sh 
+. $SCRIPT_DIR/launch_sxhkd.sh
+. $SCRIPT_DIR/launch_polybar.sh $internal_monitor $external_monitor 
+. $SCRIPT_DIR/launch_picom.sh 
