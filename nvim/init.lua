@@ -17,6 +17,7 @@ vim.cmd([[aunmenu PopUp.How-to\ disable\ mouse]])
 vim.cmd([[aunmenu PopUp.-1-]])
 
 vim.keymap.set('n', '<space>t', '<Cmd>ToggleTerm<CR>', {silent = true })
-vim.keymap.set('n', ',', '<Cmd>bp<CR>', {silent = true })
-vim.keymap.set('n', '.', '<Cmd>bn<CR>', {silent = true })
-
+vim.keymap.set('n', ',', '<Cmd>BufferLineCyclePrev<CR>', {silent = true })
+vim.keymap.set('n', '.', '<Cmd>BufferLineCycleNext<CR>', {silent = true })
+vim.keymap.set('n', '<C-,>', '<Cmd>BufferLineMovePrev<CR>', {silent = true })
+vim.keymap.set('n', '<C-.>', '<Cmd>BufferLineMoveNext<CR>', {silent = true })
